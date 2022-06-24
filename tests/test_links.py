@@ -9,7 +9,7 @@ class TransformHrefTestCase(unittest.TestCase):
 
     def test_transform_href(self):
 
-        def run_test(scene: str, patterns: []):
+        def run_test(scene: str, patterns: list):
             for index, pattern in enumerate(patterns):
                 with self.subTest(index=index, pattern=pattern):
                     case, x_href = pattern
