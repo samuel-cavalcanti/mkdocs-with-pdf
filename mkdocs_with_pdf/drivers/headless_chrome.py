@@ -5,18 +5,27 @@ from subprocess import PIPE, Popen
 from tempfile import NamedTemporaryFile
 
 
-class HeadlessChromeDriver(object):
+class HeadlessChromeDriver:
     """ 'Headless Chrome' executor """
 
-    @classmethod
-    def setup(self, program_path: str, logger: Logger):
+    __driver_args = [
+        '--disable-web-security',
+        '--no-sandbox',
+        '--headless',
+        '--disable-gpu',
+        '--disable-web-security',
+        '-–allow-file-access-from-files',
+        '--run-all-compositor-stages-before-draw',
+        '--virtual-time-budget=10000',
+        '--dump-dom'
+    ]
+
+    def __init__(self, program_path: str, logger: Logger):
         if not which(program_path):
             raise RuntimeError(
                 'No such `Headless Chrome` program or not executable'
                 + f': "{program_path}".')
-        return self(program_path, logger)
 
-    def __init__(self, program_path: str, logger: Logger):
         self._program_path = program_path
         self._logger = logger
 
@@ -27,18 +36,17 @@ class HeadlessChromeDriver(object):
             temp.close()
 
             self._logger.info("Rendering on `Headless Chrome`(execute JS).")
-            with Popen([self._program_path,
-                        '--disable-web-security',
-                        '--no-sandbox',
-                        '--headless',
-                        '--disable-gpu',
-                        '--disable-web-security',
-                        '-–allow-file-access-from-files',
-                        '--run-all-compositor-stages-before-draw',
-                        '--virtual-time-budget=10000',
-                        '--dump-dom',
-                        temp.name], stdout=PIPE) as chrome:
-                return chrome.stdout.read().decode('utf-8')
+            command_line = [self._program_path] + \
+                self.__driver_args + [temp.name]
+            with Popen(command_line, stdout=PIPE) as chrome:
+                command_output = chrome.stdout.read().decode('utf-8')
+                """
+                    Popen append a unnecessary \n on final stdout string.
+                    The \n is removed applying  command_output[:-1]
+                """
+                rendered_html = command_output[:-1]
+
+                return rendered_html
 
         except Exception as e:
             self._logger.error(f'Failed to render by JS: {e}')
