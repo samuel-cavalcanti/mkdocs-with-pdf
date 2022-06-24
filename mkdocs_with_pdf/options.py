@@ -1,9 +1,11 @@
 import logging
+from typing import Optional
 
 from mkdocs.config import config_options
 
 from .drivers.event_hook import EventHookHandler
-from .drivers.headless_chrome import HeadlessChromeDriver
+from .drivers.web_driver import WebDriver
+from .drivers.selenium_chrome_driver import SeleniumChromeDriver
 from .templates.template import Template
 
 
@@ -42,8 +44,10 @@ class Options(object):
 
         ('render_js', config_options.Type(bool, default=False)),
         ('headless_chrome_path',
-            config_options.Type(str, default='chromium-browser'))
+            config_options.Type(str, default=None))
     )
+
+    js_renderer: Optional[WebDriver]
 
     def __init__(self, local_config, config, logger: logging):
         self.strict = True if config['strict'] else False
@@ -91,7 +95,7 @@ class Options(object):
         # ...etc.
         self.js_renderer = None
         if local_config['render_js']:
-            self.js_renderer = HeadlessChromeDriver.setup(
+            self.js_renderer = SeleniumChromeDriver(
                 local_config['headless_chrome_path'], logger)
 
         # Theming
