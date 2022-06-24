@@ -21,6 +21,7 @@ mkdocs = ">=1.1"
 beautifulsoup4 = "*"
 libsass = "*"
 weasyprint = "*"
+selenium ="4.3.0"
 
 [requires]
 #python_version = "3.6"
