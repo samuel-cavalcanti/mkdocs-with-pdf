@@ -4,13 +4,13 @@ from setuptools import find_packages, setup
 
 setup(
     name='mkdocs-with-pdf',
-    version='0.9.3',
+    version='0.9.4',
     description='Generate a single PDF file from MkDocs repository',  # noqa E501
     long_description=io.open('README.md', encoding='utf8').read(),
     long_description_content_type='text/markdown',
     keywords='mkdocs pdf weasyprint',
-    url='https://github.com/orzih/mkdocs-with-pdf',
-    author='orzih',
+    url='https://github.com/samuel-cavalcanti/mkdocs-with-pdf',
+    author='Samuel',
     author_email='orzih@mail.com',
     license='MIT',
     python_requires='>=3.6',
@@ -20,6 +20,7 @@ setup(
         'beautifulsoup4>=4.6.3',
         'libsass>=0.15',
         'selenium>=4.3.0'
+        'wheel'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
