@@ -96,7 +96,7 @@ class Options(object):
         self.js_renderer = None
         if local_config['render_js']:
             self.js_renderer = SeleniumChromeDriver(
-                local_config['headless_chrome_path'], logger)
+                logger=logger, program_path=local_config['headless_chrome_path'])
 
         # Theming
         self.theme_name = config['theme'].name

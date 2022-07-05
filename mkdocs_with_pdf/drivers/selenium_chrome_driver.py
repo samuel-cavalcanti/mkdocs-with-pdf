@@ -11,7 +11,10 @@ class SeleniumChromeDriver:
     __executable_path: Optional[str]
     __log: Logger
 
-    def __init__(self, logger: Logger, program_path: Optional[str] = None) -> None:
+    def __init__(
+            self,
+            logger: Logger,
+            program_path: Optional[str] = None) -> None:
 
         self.__executable_path = program_path
         self.__log = logger
