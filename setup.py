@@ -18,7 +18,8 @@ setup(
         'mkdocs>=1.1',
         'weasyprint>=0.44',
         'beautifulsoup4>=4.6.3',
-        'libsass>=0.15'
+        'libsass>=0.15',
+        'selenium>=4.3.0'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
