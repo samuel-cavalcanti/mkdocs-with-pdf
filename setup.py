@@ -19,7 +19,7 @@ setup(
         'weasyprint>=0.44',
         'beautifulsoup4>=4.6.3',
         'libsass>=0.15',
-        'selenium==4.3.0'
+        'selenium==4.3.0',
         'wheel'
     ],
     classifiers=[
