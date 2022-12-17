@@ -8,3 +8,4 @@ class WebDriver(Protocol):
             Receive an html page in string format and execute the javascript
             returning the new rendered html
         """
+        ...
